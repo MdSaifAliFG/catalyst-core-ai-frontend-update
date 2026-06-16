@@ -213,7 +213,7 @@ export function Login() {
 
               <button
                 type="button"
-                className="w-full h-11 rounded-2xl border border-border hover:bg-accent transition-colors"
+                className="w-full h-11 rounded-2xl border border-blue-700/50 bg-slate-950 text-white hover:bg-slate-800 transition-colors"
               >
                 Continue with Google
               </button>
