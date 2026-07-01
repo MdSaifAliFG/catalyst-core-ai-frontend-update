@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { Download, ArrowLeft, Calendar } from "lucide-react";
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 export function GeneratedReport() {
   const router = useRouter();
@@ -40,7 +40,7 @@ export function GeneratedReport() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <button
-          onClick={() => navigate("/app/reports")}
+          onClick={() => router.push("/reports")}
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
         >
           <ArrowLeft className="w-5 h-5" />

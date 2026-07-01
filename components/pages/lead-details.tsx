@@ -1,10 +1,9 @@
-import { useRouter, useParams } from "next/navigation";
-import { ArrowLeft, Phone, MapPin, Tag, TrendingUp, Calendar, Clock, Play, Pause, FileText } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Phone, MapPin, Tag, TrendingUp, Calendar, Clock, Play, Pause } from "lucide-react";
 import { useState } from "react";
 
 export function LeadDetails() {
   const router = useRouter();
-  const { id } = useParams();
   const [isPlaying, setIsPlaying] = useState(false);
 
   const leadInfo = {
@@ -49,7 +48,7 @@ export function LeadDetails() {
       {/* Header */}
       <div className="flex items-center gap-3 sm:gap-4">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => router.back()}
           className="p-2 hover:bg-accent rounded-xl transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />

@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle, Loader2, Phone } from "lucide-react";
 
+const steps = [
+  { label: "Lead Imported", completed: false },
+  { label: "Script Loaded", completed: false },
+  { label: "AI Calling Running", completed: false },
+  { label: "Conversation Completed", completed: false },
+];
+
 export function CallProcessing() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
-
-  const steps = [
-    { label: "Lead Imported", completed: false },
-    { label: "Script Loaded", completed: false },
-    { label: "AI Calling Running", completed: false },
-    { label: "Conversation Completed", completed: false },
-  ];
 
   useEffect(() => {
     const timer = setInterval(() => {

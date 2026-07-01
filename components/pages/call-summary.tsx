@@ -1,10 +1,9 @@
-import { useRouter, useParams } from "next/navigation";
-import { Clock, Globe, TrendingUp, Calendar, Phone, FileText, Play, Pause } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Clock, Globe, TrendingUp, Calendar, Phone, Play, Pause } from "lucide-react";
 import { useState } from "react";
 
 export function CallSummary() {
   const router = useRouter();
-  const { id } = useParams();
   const [isPlaying, setIsPlaying] = useState(false);
 
   const transcript = [
@@ -98,7 +97,7 @@ export function CallSummary() {
             <div className="prose prose-sm max-w-none">
               <p className="text-muted-foreground leading-relaxed">
                 Customer interested in villa project. Requested more information about the property location and pricing. 
-                Wants to visit next week. Conversation was conducted in Hindi as per customer's preference. 
+                Wants to visit next week. Conversation was conducted in Hindi as per customer&apos;s preference. 
                 AI agent successfully gathered budget information and scheduled a follow-up visit. 
                 Customer showed high interest and engagement throughout the call.
               </p>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Phone, Clock, TrendingUp } from "lucide-react";
+import { Phone, Clock } from "lucide-react";
 
 interface Lead {
   id: number;
@@ -36,7 +36,9 @@ function LeadCard({ lead, onView }: { lead: Lead; onView: (id: number) => void }
 
   return (
     <div
-      ref={drag}
+      ref={(node) => {
+        drag(node);
+      }}
       onClick={() => onView(lead.id)}
       className={`bg-card border border-border rounded-xl p-4 cursor-pointer hover:border-primary transition-all ${
         isDragging ? "opacity-50" : ""
@@ -79,7 +81,9 @@ function StageColumn({ stage, onDrop, onViewLead }: { stage: Stage; onDrop: (lea
         <div className={`w-3 h-3 rounded-full ${stage.color}`} />
       </div>
       <div
-        ref={drop}
+        ref={(node) => {
+          drop(node);
+        }}
         className={`space-y-3 min-h-[600px] p-4 rounded-2xl border-2 border-dashed transition-colors ${
           isOver ? "border-primary bg-primary/5" : "border-border bg-accent/30"
         }`}

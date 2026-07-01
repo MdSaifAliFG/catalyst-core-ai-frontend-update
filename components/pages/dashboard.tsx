@@ -1,7 +1,11 @@
-import { Users, Phone, CheckCircle, Heart, Calendar, Clock, Upload, FileText, Play, Download } from "lucide-react";
+import { Users, Phone, CheckCircle, Heart, Calendar, Clock, Upload, FileText, Play } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { useState } from "react";
+import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { useState, useSyncExternalStore } from "react";
+
+const subscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 export function Dashboard() {
   const router = useRouter();
@@ -10,6 +14,7 @@ export function Dashboard() {
   const [campaignName, setCampaignName] = useState("");
   const [objective, setObjective] = useState("");
   const [script, setScript] = useState("");
+  const chartsMounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
   const [tone, setTone] = useState("Professional");
   const [language, setLanguage] = useState("English");
 
@@ -270,15 +275,17 @@ export function Dashboard() {
         <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6">
           <h3 className="text-lg sm:text-lg sm:text-xl font-bold text-foreground mb-4">Daily Calls</h3>
           <div className="w-full h-64 sm:h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={dailyCallData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-                <XAxis dataKey="day" tick={{ fill: "var(--muted-foreground)", fontSize: 12 }} />
-                <YAxis tick={{ fill: "var(--muted-foreground)", fontSize: 12 }} />
-                <Tooltip contentStyle={{ backgroundColor: "var(--card)", border: "1px solid var(--border)" }} />
-                <Bar dataKey="calls" fill="var(--primary)" radius={[8, 8, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
+            {chartsMounted && (
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={dailyCallData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="day" tick={{ fill: "var(--muted-foreground)", fontSize: 12 }} />
+                  <YAxis tick={{ fill: "var(--muted-foreground)", fontSize: 12 }} />
+                  <Tooltip contentStyle={{ backgroundColor: "var(--card)", border: "1px solid var(--border)" }} />
+                  <Bar dataKey="calls" fill="var(--primary)" radius={[8, 8, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            )}
           </div>
         </div>
 
@@ -286,25 +293,27 @@ export function Dashboard() {
         <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6">
           <h3 className="text-lg sm:text-lg sm:text-xl font-bold text-foreground mb-4">Call Status</h3>
           <div className="w-full h-64 sm:h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={callStatusData}
-                  cx="50%"
-                  cy="50%"
-                  labelLine={false}
-                  label={(entry) => `${entry.name}: ${entry.value}`}
-                  outerRadius={80}
-                  fill="var(--primary)"
-                  dataKey="value"
-                >
-                  {callStatusData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip contentStyle={{ backgroundColor: "var(--card)", border: "1px solid var(--border)" }} />
-              </PieChart>
-            </ResponsiveContainer>
+            {chartsMounted && (
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={callStatusData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    label={(entry) => `${entry.name}: ${entry.value}`}
+                    outerRadius={80}
+                    fill="var(--primary)"
+                    dataKey="value"
+                  >
+                    {callStatusData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip contentStyle={{ backgroundColor: "var(--card)", border: "1px solid var(--border)" }} />
+                </PieChart>
+              </ResponsiveContainer>
+            )}
           </div>
         </div>
       </div>
@@ -315,15 +324,17 @@ export function Dashboard() {
         <div className="lg:col-span-1 bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6">
           <h3 className="text-lg sm:text-lg sm:text-xl font-bold text-foreground mb-4">Lead Stage Distribution</h3>
           <div className="w-full h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={leadStageData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-                <XAxis dataKey="name" tick={{ fill: "var(--muted-foreground)", fontSize: 12 }} angle={-45} height={80} />
-                <YAxis tick={{ fill: "var(--muted-foreground)", fontSize: 12 }} />
-                <Tooltip contentStyle={{ backgroundColor: "var(--card)", border: "1px solid var(--border)" }} />
-                <Line type="monotone" dataKey="count" stroke="var(--primary)" strokeWidth={2} dot={{ fill: "var(--primary)", r: 4 }} />
-              </LineChart>
-            </ResponsiveContainer>
+            {chartsMounted && (
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={leadStageData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="name" tick={{ fill: "var(--muted-foreground)", fontSize: 12 }} angle={-45} height={80} />
+                  <YAxis tick={{ fill: "var(--muted-foreground)", fontSize: 12 }} />
+                  <Tooltip contentStyle={{ backgroundColor: "var(--card)", border: "1px solid var(--border)" }} />
+                  <Line type="monotone" dataKey="count" stroke="var(--primary)" strokeWidth={2} dot={{ fill: "var(--primary)", r: 4 }} />
+                </LineChart>
+              </ResponsiveContainer>
+            )}
           </div>
         </div>
 

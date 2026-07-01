@@ -1,11 +1,11 @@
 'use client';
 
-import { Check, X, Phone, FileText, Upload, BarChart3 } from "lucide-react";
+import { Check, X, Phone, FileText, Upload, BarChart3, type LucideIcon } from "lucide-react";
 import { useState } from "react";
 
 interface Notification {
   id: number;
-  icon: any;
+  icon: LucideIcon;
   text: string;
   time: string;
   read: boolean;
@@ -70,7 +70,7 @@ export function Notifications() {
         <div className="bg-card border border-border rounded-2xl p-20 text-center">
           <Check className="w-16 h-16 mx-auto mb-4 text-green-500" />
           <h3 className="mb-2">No Notifications</h3>
-          <p className="text-muted-foreground">You're all caught up.</p>
+          <p className="text-muted-foreground">You&apos;re all caught up.</p>
         </div>
       ) : (
         <div className="space-y-8">
