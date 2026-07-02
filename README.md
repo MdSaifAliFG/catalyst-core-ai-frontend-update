@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Catalyst Core AI Frontend
+
+Catalyst Core AI is a Next.js frontend for an AI voice-agent platform. The app presents a working sales and lead-engagement dashboard where teams can upload lead files, configure AI calling campaigns, monitor call activity, review generated summaries, manage pipeline stages, and view performance reports.
+
+## Features
+
+- Login screen for entering the Catalyst workspace
+- Responsive dashboard with KPI cards, lead upload preview, campaign setup, tone/language controls, and call analytics
+- AI call-processing flow with a simulated live calling timeline
+- Call history and generated call-summary screens
+- Lead detail pages with AI notes, transcript, call recording controls, activity timeline, and follow-up information
+- Drag-and-drop pipeline board powered by React DnD
+- Reports area with charts, export actions, and generated performance report view
+- Notifications, profile, and settings pages
+- Light/dark theme support through `next-themes`
+
+## Tech Stack
+
+- Next.js 16 App Router
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Radix UI and shadcn-style UI components
+- Recharts for analytics visualizations
+- React DnD for pipeline drag and drop
+- Lucide React for icons
+- TanStack Query, Axios, and Zustand included for data/state workflows
+
+## Project Structure
+
+```text
+app/                  App Router pages and providers
+components/           Layouts, navigation, page components, and shared UI
+components/pages/     Main product screens
+components/ui/        Reusable UI primitives
+lib/                  Shared utilities
+public/               Static assets
+```
+
+## Routes
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Login screen |
+| `/dashboard` | Main AI campaign dashboard |
+| `/call-processing` | Simulated active AI calling workflow |
+| `/call-history` | Historical call records |
+| `/call-summary/[id]` | Detailed call summary and transcript |
+| `/lead/[id]` | Lead profile, notes, transcript, and follow-up details |
+| `/pipeline` | Drag-and-drop lead pipeline |
+| `/reports` | Analytics and reporting dashboard |
+| `/generated-report` | Generated performance report |
+| `/notifications` | Notification center |
+| `/profile` | User profile |
+| `/settings` | Workspace settings |
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3002](http://localhost:3002) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev
+```
 
-## Learn More
+Runs the Next.js development server on port `3002`.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Creates a production build.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run start
+```
 
-## Deploy on Vercel
+Starts the production server on `0.0.0.0:3000` after a build.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run lint
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Runs ESLint across the project.
+
+## Notes
+
+- The current UI uses local mock data to demonstrate product workflows.
+- Form submissions and campaign actions are prototype interactions that route between frontend screens.
+- The app is structured so backend APIs can be connected later through the existing data/state dependencies.
